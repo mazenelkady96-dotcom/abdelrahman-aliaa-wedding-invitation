@@ -97,7 +97,7 @@
         }
 
         .is-opening .envelope-card {
-            transform: translateY(-135px) scale(1.06);
+            transform: translateY(-110px) scale(1.02);
         }
 
         .is-zooming {
@@ -146,7 +146,6 @@
         .reveal-delay-2 { transition-delay: 0.3s; }
         .reveal-delay-3 { transition-delay: 0.45s; }
 
-        /* Floating Pulse Animation */
         @keyframes floatSlow {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
@@ -155,7 +154,6 @@
             animation: floatSlow 4.5s ease-in-out infinite;
         }
 
-        /* Luxury Card Glass & Border */
         .royal-card {
             background: linear-gradient(160deg, rgba(255, 253, 249, 0.92) 0%, rgba(232, 221, 201, 0.35) 100%);
             backdrop-filter: blur(8px);
@@ -169,41 +167,19 @@
             border-color: rgba(214, 184, 117, 0.85);
             box-shadow: 0 28px 60px -15px rgba(73, 58, 48, 0.14);
         }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, ::before, ::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
     </style>
 </head>
 <body class="antialiased selection:bg-champagne selection:text-white">
 
-    <!-- Ambient Golden Dust & Rose Petals Canvas -->
     <canvas id="ambient-canvas" class="fixed inset-0 pointer-events-none z-10"></canvas>
 
     <!-- =====================================================================
          1. OPENING EXPERIENCE — INTERACTIVE 3D ENVELOPE
     ====================================================================== -->
     <section id="envelope-overlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F8F4EC] px-4 select-none overflow-hidden">
-        <!-- Soft Royal Ambient Radial Glow -->
         <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 50% 45%, rgba(214, 184, 117, 0.22) 0%, rgba(232, 221, 201, 0.35) 45%, rgba(248, 244, 236, 1) 85%);"></div>
 
-        <!-- Subtle Corner Botanical Flourishes -->
-        <svg class="absolute top-6 left-6 w-24 h-24 text-champagne/30 pointer-events-none" viewBox="0 0 100 100" fill="none">
-            <path d="M5 95 C5 40, 40 5, 95 5" stroke="currentColor" stroke-width="1"/>
-            <path d="M15 95 C15 50, 50 15, 95 15" stroke="currentColor" stroke-width="0.6" stroke-dasharray="3 3"/>
-        </svg>
-        <svg class="absolute bottom-6 right-6 w-24 h-24 text-champagne/30 pointer-events-none rotate-180" viewBox="0 0 100 100" fill="none">
-            <path d="M5 95 C5 40, 40 5, 95 5" stroke="currentColor" stroke-width="1"/>
-            <path d="M15 95 C15 50, 50 15, 95 15" stroke="currentColor" stroke-width="0.6" stroke-dasharray="3 3"/>
-        </svg>
-
-        <!-- Header Prompt -->
-        <div id="envelope-header" class="relative z-20 text-center mb-10 transition-opacity duration-700">
+        <div id="envelope-header" class="relative z-20 text-center mb-6 transition-opacity duration-700">
             <p class="font-sans text-[11px] sm:text-xs tracking-[0.38em] uppercase text-rosegold font-medium mb-2">
                 A Special Invitation For You
             </p>
@@ -211,50 +187,45 @@
         </div>
 
         <!-- 3D Envelope Container -->
-        <div class="envelope-scene relative z-20 w-full max-w-[350px] sm:max-w-[430px] aspect-[1.48/1] flex items-center justify-center">
+        <div class="envelope-scene relative z-20 w-full max-w-[330px] sm:max-w-[400px] aspect-[1.5/1] flex items-center justify-center">
             <div id="envelope-wrapper" onclick="triggerEnvelopeOpen()" role="button" tabindex="0" aria-label="Open Wedding Invitation Envelope"
                  class="envelope-wrapper relative w-full h-full cursor-pointer animate-float">
                 
                 <!-- Envelope Back Base -->
                 <div class="absolute inset-0 rounded-lg bg-[#EFE7D8] border border-champagne/70 shadow-[0_28px_65px_-12px_rgba(73,58,48,0.28)] overflow-hidden">
-                    <!-- Gold Inner Foil Lining -->
                     <div class="absolute inset-2 rounded border border-champagne/40 bg-gradient-to-b from-[#E8DDC9] to-[#F5EFE4]"></div>
                 </div>
 
-                <!-- Invitation Card Inside Envelope -->
-                <div id="envelope-card" class="envelope-card absolute inset-x-4 top-3 bottom-3 rounded bg-[#FCF9F2] border border-champagne/80 shadow-md flex flex-col items-center justify-center p-5 text-center z-10">
-                    <div class="w-full h-full border border-champagne/40 flex flex-col items-center justify-center px-3">
-                        <span class="font-sans text-[9px] tracking-[0.3em] uppercase text-rosegold mb-1">Wedding Invitation</span>
-                        <h2 class="font-serif text-2xl sm:text-3xl tracking-wider text-darkbrown font-semibold">Abdelrahman & Aliaa</h2>
-                        <div class="w-10 h-[1px] bg-champagne my-2"></div>
-                        <p class="font-sans text-[10px] tracking-[0.22em] text-darkbrown/70 uppercase">23 December 2026</p>
+                <!-- Invitation Card Inside Envelope (Fixed sizing & padding) -->
+                <div id="envelope-card" class="envelope-card absolute inset-x-6 top-4 bottom-4 rounded bg-[#FCF9F2] border border-champagne/80 shadow-md flex flex-col items-center justify-center p-3 text-center z-10">
+                    <div class="w-full h-full border border-champagne/40 flex flex-col items-center justify-center px-2">
+                        <span class="font-sans text-[8px] sm:text-[9px] tracking-[0.25em] uppercase text-rosegold mb-1">Wedding Invitation</span>
+                        <h2 class="font-serif text-lg sm:text-xl tracking-wider text-darkbrown font-semibold leading-tight">Abdelrahman & Aliaa</h2>
+                        <div class="w-8 h-[1px] bg-champagne my-1.5"></div>
+                        <p class="font-sans text-[9px] tracking-[0.18em] text-darkbrown/70 uppercase">23 December 2026</p>
                     </div>
                 </div>
 
                 <!-- Envelope Left & Right Side Flaps -->
-                <svg class="absolute inset-0 w-full h-full z-20 pointer-events-none rounded-lg overflow-hidden" viewBox="0 0 430 290" preserveAspectRatio="none">
-                    <!-- Left Pocket Flap -->
-                    <polygon points="0,0 220,148 0,290" fill="#F5EFE3" stroke="#D6B875" stroke-width="1.2"/>
-                    <!-- Right Pocket Flap -->
-                    <polygon points="430,0 210,148 430,290" fill="#F2EBDD" stroke="#D6B875" stroke-width="1.2"/>
-                    <!-- Bottom Pocket Flap -->
-                    <polygon points="0,290 215,138 430,290" fill="#F8F4EC" stroke="#D6B875" stroke-width="1.5"/>
-                    <!-- Champagne Gold Edge Trim -->
-                    <polyline points="2,288 215,140 428,288" fill="none" stroke="#D6B875" stroke-width="1.5" opacity="0.85"/>
+                <svg class="absolute inset-0 w-full h-full z-20 pointer-events-none rounded-lg overflow-hidden" viewBox="0 0 400 266" preserveAspectRatio="none">
+                    <polygon points="0,0 200,133 0,266" fill="#F5EFE3" stroke="#D6B875" stroke-width="1.2"/>
+                    <polygon points="400,0 200,133 400,266" fill="#F2EBDD" stroke="#D6B875" stroke-width="1.2"/>
+                    <polygon points="0,266 200,126 400,266" fill="#F8F4EC" stroke="#D6B875" stroke-width="1.5"/>
+                    <polyline points="2,264 200,128 398,264" fill="none" stroke="#D6B875" stroke-width="1.5" opacity="0.85"/>
                 </svg>
 
                 <!-- Envelope Top Flap (3D Hinged) -->
-                <div id="envelope-flap" class="envelope-flap absolute inset-x-0 top-0 h-[56%] z-30 pointer-events-none">
-                    <svg class="w-full h-full drop-shadow-[0_6px_10px_rgba(73,58,48,0.14)]" viewBox="0 0 430 162" preserveAspectRatio="none">
-                        <path d="M 2,0 L 428,0 L 222,155 Q 215,160 208,155 Z" fill="#F6F0E4" stroke="#D6B875" stroke-width="1.6"/>
-                        <path d="M 10,4 L 420,4 L 215,150 Z" fill="none" stroke="#D6B875" stroke-width="0.8" opacity="0.65"/>
+                <div id="envelope-flap" class="envelope-flap absolute inset-x-0 top-0 h-[55%] z-30 pointer-events-none">
+                    <svg class="w-full h-full drop-shadow-[0_6px_10px_rgba(73,58,48,0.14)]" viewBox="0 0 400 146" preserveAspectRatio="none">
+                        <path d="M 2,0 L 398,0 L 204,140 Q 200,144 196,140 Z" fill="#F6F0E4" stroke="#D6B875" stroke-width="1.6"/>
+                        <path d="M 10,4 L 390,4 L 200,132 Z" fill="none" stroke="#D6B875" stroke-width="0.8" opacity="0.65"/>
                     </svg>
                 </div>
 
                 <!-- Wax Seal with A & A Initials -->
-                <div id="wax-seal" class="wax-seal absolute left-1/2 top-[51%] -translate-x-1/2 -translate-y-1/2 z-40 w-20 h-20 sm:w-22 sm:h-22 rounded-full flex items-center justify-center">
+                <div id="wax-seal" class="wax-seal absolute left-1/2 top-[50%] -translate-x-1/2 -translate-y-1/2 z-40 w-16 h-16 sm:w-18 sm:h-18 rounded-full flex items-center justify-center">
                     <div class="text-center leading-none">
-                        <span class="font-serif text-xl sm:text-2xl font-semibold tracking-wider text-[#F8F4EC] drop-shadow-sm">A<span class="font-script text-lg sm:text-xl mx-0.5 text-[#F4E4B8]">&amp;</span>A</span>
+                        <span class="font-serif text-lg sm:text-xl font-semibold tracking-wider text-[#F8F4EC] drop-shadow-sm">A<span class="font-script text-base sm:text-lg mx-0.5 text-[#F4E4B8]">&amp;</span>A</span>
                     </div>
                 </div>
 
@@ -263,10 +234,10 @@
             </div>
         </div>
 
-        <!-- Bottom Tap Prompt -->
-        <div id="envelope-footer" class="relative z-20 mt-10 text-center transition-opacity duration-700">
+        <!-- Bottom Tap Prompt (Placed OUTSIDE the white/beige envelope box) -->
+        <div id="envelope-footer" class="relative z-20 mt-8 text-center transition-opacity duration-700">
             <button onclick="triggerEnvelopeOpen()" class="group inline-flex flex-col items-center gap-2 focus:outline-none">
-                <span class="px-7 py-2.5 rounded-full bg-white/80 border border-champagne/70 shadow-sm font-sans text-xs tracking-[0.28em] uppercase text-darkbrown group-hover:bg-champagne group-hover:text-white transition-all duration-300">
+                <span class="px-7 py-2.5 rounded-full bg-white/90 border border-champagne/80 shadow-sm font-sans text-xs tracking-[0.28em] uppercase text-darkbrown group-hover:bg-champagne group-hover:text-white transition-all duration-300">
                     Tap to Open
                 </span>
             </button>
@@ -281,13 +252,11 @@
 
         <!-- HERO SECTION -->
         <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 py-24 overflow-hidden">
-            <!-- Soft Royal Backdrop Ornament -->
             <div class="absolute inset-0 pointer-events-none flex items-center justify-center opacity-25">
                 <div class="w-[540px] h-[540px] sm:w-[720px] sm:h-[720px] rounded-full border border-champagne/40"></div>
                 <div class="absolute w-[480px] h-[480px] sm:w-[650px] sm:h-[650px] rounded-full border border-dashed border-rosegold/35"></div>
             </div>
 
-            <!-- Delicate Top Floral SVG -->
             <div class="reveal mb-6">
                 <svg class="w-36 h-12 mx-auto text-champagne" viewBox="0 0 180 50" fill="none">
                     <path d="M10 25 C45 25, 65 10, 90 25 C115 10, 135 25, 170 25" stroke="currentColor" stroke-width="1"/>
@@ -302,7 +271,6 @@
                 Together With Their Families
             </p>
 
-            <!-- Couple Names with Gold Foil Treatment -->
             <div class="reveal reveal-delay-1 my-2">
                 <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl font-semibold tracking-[0.14em] gold-foil uppercase leading-tight">
                     Abdelrahman
@@ -317,7 +285,6 @@
                 </h1>
             </div>
 
-            <!-- Romantic Tagline -->
             <div class="reveal reveal-delay-2 max-w-xl mx-auto mt-10 pt-8 border-t border-champagne/40">
                 <p class="font-script text-3xl sm:text-4xl text-rosegold mb-3">
                     Two Hearts, One Beautiful Journey
@@ -327,7 +294,6 @@
                 </p>
             </div>
 
-            <!-- Scroll Indicator -->
             <div class="reveal reveal-delay-3 mt-14 flex flex-col items-center gap-2 text-darkbrown/50">
                 <span class="font-sans text-[10px] tracking-[0.3em] uppercase">Scroll to Explore</span>
                 <div class="w-[1px] h-10 bg-gradient-to-b from-champagne to-transparent"></div>
@@ -336,7 +302,7 @@
 
 
         <!-- =================================================================
-             3. 3D INTERTWINED ENGRAVED GOLD WEDDING RINGS (THREE.JS)
+             3. 3D RINGS SECTION
         ================================================================== -->
         <section class="relative py-20 sm:py-28 px-4 overflow-hidden">
             <div class="max-w-4xl mx-auto text-center">
@@ -345,7 +311,6 @@
                     <h2 class="font-serif text-3xl sm:text-4xl text-darkbrown font-medium tracking-wide">Two Souls, One Promise</h2>
                 </div>
 
-                <!-- 3D WebGL Canvas Container -->
                 <div class="reveal reveal-delay-1 relative w-full h-[330px] sm:h-[420px] my-6 flex items-center justify-center">
                     <div class="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-champagne/15 blur-3xl pointer-events-none"></div>
                     <canvas id="rings-canvas" class="w-full h-full max-w-[680px] cursor-grab active:cursor-grabbing"></canvas>
@@ -364,10 +329,8 @@
         <section class="relative py-20 sm:py-28 px-4 sm:px-8">
             <div class="reveal max-w-3xl mx-auto">
                 <div class="relative p-8 sm:p-14 rounded-2xl bg-[#FCF9F2]/90 border border-champagne/70 shadow-[0_25px_60px_-15px_rgba(73,58,48,0.1)] text-center">
-                    <!-- Inner Decorative Double Frame -->
                     <div class="absolute inset-3 rounded-xl border border-champagne/35 pointer-events-none"></div>
 
-                    <!-- Top Ornamental Crest -->
                     <div class="mb-6 flex items-center justify-center gap-3 text-champagne">
                         <span class="w-12 h-[1px] bg-champagne/60"></span>
                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
@@ -376,12 +339,10 @@
                         <span class="w-12 h-[1px] bg-champagne/60"></span>
                     </div>
 
-                    <!-- Exact Quranic Verse -->
                     <p dir="rtl" lang="ar" class="font-arabic text-2xl sm:text-4xl md:text-[40px] leading-[2.1] sm:leading-[2.2] text-darkbrown font-normal px-2">
                         ﴿وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنْفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً﴾
                     </p>
 
-                    <!-- Reference -->
                     <div class="mt-8 pt-5 border-t border-champagne/30 inline-block px-8">
                         <p class="font-sans text-xs tracking-[0.28em] uppercase text-rosegold font-medium">
                             Surah Ar-Rum – Ayah 21
@@ -403,9 +364,7 @@
                     <div class="w-20 h-[1px] bg-champagne mx-auto mt-5"></div>
                 </div>
 
-                <!-- 3 Luxury Info Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-7 sm:gap-8">
-                    <!-- Date Card -->
                     <div class="reveal royal-card rounded-2xl p-8 sm:p-10 text-center flex flex-col items-center justify-center">
                         <div class="w-14 h-14 rounded-full bg-ivory border border-champagne/60 flex items-center justify-center text-champagne mb-6 shadow-sm">
                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
@@ -415,15 +374,10 @@
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
                             </svg>
                         </div>
-                        <span class="font-sans text-[11px] tracking-[0.3em] uppercase text-rosegold font-semibold mb-2">
-                            WEDNESDAY
-                        </span>
-                        <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-darkbrown tracking-wide">
-                            23 DECEMBER 2026
-                        </h3>
+                        <span class="font-sans text-[11px] tracking-[0.3em] uppercase text-rosegold font-semibold mb-2">WEDNESDAY</span>
+                        <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-darkbrown tracking-wide">23 DECEMBER 2026</h3>
                     </div>
 
-                    <!-- Time Card -->
                     <div class="reveal reveal-delay-1 royal-card rounded-2xl p-8 sm:p-10 text-center flex flex-col items-center justify-center">
                         <div class="w-14 h-14 rounded-full bg-ivory border border-champagne/60 flex items-center justify-center text-champagne mb-6 shadow-sm">
                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
@@ -431,15 +385,10 @@
                                 <polyline points="12 6 12 12 16 14"></polyline>
                             </svg>
                         </div>
-                        <span class="font-sans text-[11px] tracking-[0.3em] uppercase text-rosegold font-semibold mb-2">
-                            ARRIVAL TIME
-                        </span>
-                        <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-darkbrown tracking-wide">
-                            8:00 PM
-                        </h3>
+                        <span class="font-sans text-[11px] tracking-[0.3em] uppercase text-rosegold font-semibold mb-2">ARRIVAL TIME</span>
+                        <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-darkbrown tracking-wide">8:00 PM</h3>
                     </div>
 
-                    <!-- Venue Card -->
                     <div class="reveal reveal-delay-2 royal-card rounded-2xl p-8 sm:p-10 text-center flex flex-col items-center justify-center">
                         <div class="w-14 h-14 rounded-full bg-ivory border border-champagne/60 flex items-center justify-center text-champagne mb-6 shadow-sm">
                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
@@ -447,16 +396,11 @@
                                 <circle cx="12" cy="10" r="3"></circle>
                             </svg>
                         </div>
-                        <span class="font-sans text-[11px] tracking-[0.3em] uppercase text-rosegold font-semibold mb-2">
-                            VENUE
-                        </span>
-                        <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-darkbrown tracking-wide">
-                            TOKYO HALL
-                        </h3>
+                        <span class="font-sans text-[11px] tracking-[0.3em] uppercase text-rosegold font-semibold mb-2">VENUE</span>
+                        <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-darkbrown tracking-wide">TOKYO HALL</h3>
                     </div>
                 </div>
 
-                <!-- Live Countdown Bar -->
                 <div class="reveal mt-12 royal-card rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto text-center">
                     <p class="font-sans text-[10px] tracking-[0.32em] uppercase text-rosegold mb-4">Counting Down To The Celebration</p>
                     <div id="countdown" class="grid grid-cols-4 gap-3 sm:gap-6">
@@ -479,7 +423,6 @@
                     </div>
                 </div>
 
-                <!-- Prominent VIEW LOCATION Button -->
                 <div class="reveal mt-12 text-center">
                     <a href="https://maps.app.goo.gl/js32HkwPGe1FBVAP8" target="_blank" rel="noopener noreferrer"
                        class="group inline-flex items-center gap-3 px-10 py-4 rounded-full bg-darkbrown text-ivory font-sans text-xs sm:text-sm tracking-[0.26em] uppercase font-medium shadow-[0_14px_30px_-8px_rgba(73,58,48,0.45)] hover:bg-[#5E4B3E] hover:shadow-[0_18px_38px_-8px_rgba(214,184,117,0.55)] border border-champagne/60 transition-all duration-300">
@@ -495,11 +438,10 @@
 
 
         <!-- =================================================================
-             6. FINAL SECTION & WHATSAPP SHARING
+             6. FINAL SECTION (WhatsApp share removed)
         ================================================================== -->
         <footer class="relative pt-20 pb-28 px-6 text-center overflow-hidden bg-gradient-to-b from-transparent to-softbeige/45">
             <div class="reveal max-w-2xl mx-auto">
-                <!-- Animated Floral Crest -->
                 <div class="mb-8 animate-float">
                     <svg class="w-44 h-20 mx-auto text-champagne" viewBox="0 0 220 90" fill="none">
                         <path d="M20 65 C60 65, 85 35, 110 35 C135 35, 160 65, 200 65" stroke="currentColor" stroke-width="1.1"/>
@@ -522,32 +464,20 @@
                 <h3 class="font-serif text-2xl sm:text-4xl tracking-[0.18em] gold-foil font-semibold uppercase mb-3">
                     ABDELRAHMAN &amp; ALIAA
                 </h3>
-                <p class="font-sans text-xs tracking-[0.25em] uppercase text-darkbrown/75 mb-12">
+                <p class="font-sans text-xs tracking-[0.25em] uppercase text-darkbrown/75">
                     With Love ❤️
                 </p>
-
-                <!-- WhatsApp / Native Share Button -->
-                <div>
-                    <button onclick="shareInvitation()"
-                            class="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-white/90 border border-champagne text-darkbrown font-sans text-xs tracking-[0.2em] uppercase shadow-sm hover:bg-champagne hover:text-white transition-all duration-300">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
-                        </svg>
-                        <span>Share Invitation</span>
-                    </button>
-                </div>
             </div>
         </footer>
     </main>
 
 
     <!-- =====================================================================
-         JAVASCRIPT: ENVELOPE ANIMATION, PARTICLES, 3D RINGS & COUNTDOWN
+         JAVASCRIPT
     ====================================================================== -->
     <script>
         let isEnvelopeOpened = false;
 
-        // 1. Wax Seal Particle Shatter + 3D Envelope Opening Sequence
         function triggerEnvelopeOpen() {
             if (isEnvelopeOpened) return;
             isEnvelopeOpened = true;
@@ -559,11 +489,9 @@
             const overlay = document.getElementById('envelope-overlay');
             const main = document.getElementById('main-invitation');
 
-            // Step 1: Shatter wax seal into golden & rose-gold particles
             seal.classList.add('seal-shatter');
             spawnSealParticles();
 
-            // Step 2: Open 3D flap & slide out invitation card
             setTimeout(() => {
                 wrapper.classList.remove('animate-float');
                 wrapper.classList.add('is-opening');
@@ -571,12 +499,10 @@
                 footer.style.opacity = '0';
             }, 220);
 
-            // Step 3: Camera zoom toward the card
             setTimeout(() => {
                 wrapper.classList.add('is-zooming');
             }, 1450);
 
-            // Step 4: Reveal main wedding invitation smoothly
             setTimeout(() => {
                 overlay.style.opacity = '0';
                 overlay.style.transition = 'opacity 0.8s ease';
@@ -589,7 +515,6 @@
             }, 2900);
         }
 
-        // Keyboard accessibility for envelope
         document.getElementById('envelope-wrapper').addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -597,7 +522,6 @@
             }
         });
 
-        // Wax Seal Burst Particles
         function spawnSealParticles() {
             const canvas = document.getElementById('burst-canvas');
             if (!canvas) return;
@@ -606,7 +530,7 @@
             canvas.height = canvas.offsetHeight;
 
             const cx = canvas.width / 2;
-            const cy = canvas.height * 0.51;
+            const cy = canvas.height * 0.5;
             const colors = ['#D6B875', '#F4E4B8', '#C58E83', '#E6B1A6', '#FFF8E7'];
             const particles = [];
 
@@ -649,7 +573,6 @@
             animateBurst();
         }
 
-        // 2. Ambient Golden Dust & Rose Petals Background
         (function initAmbientParticles() {
             const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (prefersReduced) return;
@@ -692,7 +615,6 @@
             function render() {
                 ctx.clearRect(0, 0, width, height);
 
-                // Golden dust
                 for (const d of dust) {
                     d.x += d.vx;
                     d.y += d.vy;
@@ -706,7 +628,6 @@
                     ctx.fill();
                 }
 
-                // Soft rose-champagne petals
                 for (const p of petals) {
                     p.sway += 0.015;
                     p.x += p.vx + Math.sin(p.sway) * 0.35;
@@ -735,7 +656,6 @@
             render();
         })();
 
-        // 3. Three.js Realistic Intertwined Engraved Gold Wedding Rings
         (function init3DRings() {
             const canvas = document.getElementById('rings-canvas');
             if (!canvas || typeof THREE === 'undefined') return;
@@ -750,7 +670,6 @@
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.25;
 
-            // Create procedural environment reflection texture for realistic metallic gold sheen
             const pmremCanvas = document.createElement('canvas');
             pmremCanvas.width = 256;
             pmremCanvas.height = 128;
@@ -763,7 +682,6 @@
             grad.addColorStop(1, '#B89246');
             pCtx.fillStyle = grad;
             pCtx.fillRect(0, 0, 256, 128);
-            // Bright studio softbox highlights
             pCtx.fillStyle = '#FFFFFF';
             pCtx.fillRect(30, 15, 55, 25);
             pCtx.fillRect(165, 75, 60, 22);
@@ -772,7 +690,6 @@
             envTex.mapping = THREE.EquirectangularReflectionMapping;
             scene.environment = envTex;
 
-            // Helper to generate engraved bump/texture map with name
             function createEngravedTexture(nameText) {
                 const c = document.createElement('canvas');
                 c.width = 1024;
@@ -794,7 +711,6 @@
                 return tex;
             }
 
-            // Custom beveled luxury wedding band profile using LatheGeometry
             function createRingMesh(colorHex, nameText) {
                 const points = [];
                 const radius = 1.25;
@@ -827,12 +743,10 @@
 
             const ringsGroup = new THREE.Group();
 
-            // Ring 1: Champagne Gold (Abdelrahman)
             const ring1 = createRingMesh(0xDFC07A, 'Abdelrahman');
             ring1.position.set(-0.52, 0.08, 0);
             ring1.rotation.set(0.45, 0.3, -0.35);
 
-            // Ring 2: Warm Rose-Champagne Gold (Aliaa) intertwined
             const ring2 = createRingMesh(0xD8A48F, 'Aliaa');
             ring2.position.set(0.52, -0.08, 0.05);
             ring2.rotation.set(-0.42, -0.25, 0.42);
@@ -841,7 +755,6 @@
             ringsGroup.add(ring2);
             scene.add(ringsGroup);
 
-            // Cinematic 3-point lighting
             const ambient = new THREE.AmbientLight(0xFFF8EB, 0.9);
             scene.add(ambient);
 
@@ -853,7 +766,6 @@
             rimLight.position.set(-5, -3, 4);
             scene.add(rimLight);
 
-            // Interactive drag rotation
             let isDragging = false;
             let prevX = 0;
             let targetRotY = 0;
@@ -895,7 +807,6 @@
             animate();
         })();
 
-        // 4. Scroll Reveal Observer
         function initScrollReveal() {
             const elements = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
@@ -910,7 +821,6 @@
             elements.forEach((el) => observer.observe(el));
         }
 
-        // 5. Live Wedding Countdown (Wednesday, 23 December 2026 at 8:00 PM)
         (function initCountdown() {
             const targetDate = new Date('2026-12-23T20:00:00').getTime();
 
@@ -931,20 +841,6 @@
             update();
             setInterval(update, 1000);
         })();
-
-        // 6. WhatsApp & Web Share API Integration
-        function shareInvitation() {
-            const title = 'Abdelrahman & Aliaa | Wedding Invitation';
-            const text = "You're invited to celebrate the beautiful beginning of Abdelrahman & Aliaa's journey. Wednesday, December 23, 2026 at 8:00 PM – Tokyo Hall.";
-            const url = window.location.href;
-
-            if (navigator.share) {
-                navigator.share({ title, text, url }).catch(() => {});
-            } else {
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text + '\n' + url)}`;
-                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-            }
-        }
     </script>
 </body>
 </html>
