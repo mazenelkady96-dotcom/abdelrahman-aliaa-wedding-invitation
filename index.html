@@ -1,13 +1,163 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>wedding-invitation</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdelrahman & Aliaa | Wedding Invitation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Amiri for Arabic & Playfair Display for English -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: '#F8F4EC',
+                        champagne: '#D6B875',
+                        softbeige: '#E8DDC9',
+                        darkbrown: '#493A30',
+                        rosegold: '#C58E83'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        arabic: ['"Amiri"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+    </style>
+</head>
+<body class="bg-ivory text-darkbrown font-serif relative overflow-x-hidden selection:bg-champagne selection:text-white">
+
+    <!-- Envelope Opening Screen -->
+    <div id="envelope-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-ivory px-4 transition-all duration-1000">
+        <div class="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#D6B875_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        
+        <div class="text-center mb-8">
+            <span class="text-rosegold text-xs md:text-sm tracking-[0.3em] uppercase block mb-2 font-sans">A Special Invitation For You</span>
+            <h1 class="text-3xl md:text-4xl text-darkbrown font-light tracking-wide">Abdelrahman & Aliaa</h1>
+        </div>
+
+        <!-- Interactive Envelope -->
+        <div onclick="openInvitation()" class="relative w-80 md:w-96 h-56 md:h-64 bg-softbeige rounded-lg shadow-2xl cursor-pointer transform hover:scale-105 transition-all duration-500 border border-champagne flex items-center justify-center group">
+            <!-- Wax Seal -->
+            <div class="absolute z-20 w-16 h-16 bg-rosegold rounded-full flex items-center justify-center shadow-lg border-2 border-champagne group-hover:rotate-12 transition-transform">
+                <span class="text-white font-serif font-bold text-lg tracking-wider">A&A</span>
+            </div>
+            
+            <div class="absolute inset-x-0 bottom-0 p-6 text-center z-10">
+                <span class="text-xs uppercase tracking-[0.2em] text-darkbrown font-sans bg-ivory/90 px-4 py-2 rounded-full shadow-sm">
+                    Tap to Open
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content (Hidden until opened) -->
+    <div id="main-content" class="opacity-0 transition-opacity duration-1000 pointer-events-none">
+        
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative py-20">
+            <div class="absolute inset-0 pointer-events-none opacity-10 bg-[radial-gradient(#D6B875_1px,transparent_1px)] [background-size:20px_20px]"></div>
+            
+            <p class="text-xs tracking-[0.4em] uppercase text-rosegold mb-6 font-sans">Together With Their Families</p>
+            
+            <h1 class="text-4xl md:text-7xl font-light text-darkbrown tracking-wider mb-2">
+                ABDELRAHMAN
+            </h1>
+            <span class="text-3xl md:text-4xl text-champagne font-serif italic my-2">&</span>
+            <h1 class="text-4xl md:text-7xl font-light text-darkbrown tracking-wider mt-2 mb-8">
+                ALIAA
+            </h1>
+
+            <div class="max-w-md mx-auto my-6 border-y border-champagne/40 py-6">
+                <p class="italic text-lg text-darkbrown/80 mb-2">"Two Hearts, One Beautiful Journey"</p>
+                <p class="text-xs md:text-sm font-sans tracking-widest text-darkbrown/70 uppercase">Joyfully invite you to celebrate their wedding</p>
+            </div>
+        </section>
+
+        <!-- Quranic Verse Section -->
+        <section class="py-16 px-4 bg-softbeige/30 text-center relative">
+            <div class="max-w-2xl mx-auto p-8 border border-champagne/60 rounded-xl bg-ivory/80 shadow-sm">
+                <p class="text-2xl md:text-3xl leading-loose font-arabic text-darkbrown mb-4">
+                    ﴿وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنْفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً﴾
+                </p>
+                <p class="text-xs font-sans tracking-[0.2em] text-rosegold uppercase">Surah Ar-Rum – Ayah 21</p>
+            </div>
+        </section>
+
+        <!-- Wedding Details Section -->
+        <section class="py-20 px-4 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                
+                <div class="bg-softbeige/40 p-8 rounded-xl border border-champagne/30 shadow-sm">
+                    <svg class="w-8 h-8 text-rosegold mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                    <h3 class="text-xs font-sans tracking-[0.3em] uppercase text-rosegold mb-2">Date</h3>
+                    <p class="text-xl font-medium">Wednesday</p>
+                    <p class="text-lg text-darkbrown/80">23 December 2026</p>
+                </div>
+
+                <div class="bg-softbeige/40 p-8 rounded-xl border border-champagne/30 shadow-sm">
+                    <svg class="w-8 h-8 text-rosegold mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <h3 class="text-xs font-sans tracking-[0.3em] uppercase text-rosegold mb-2">Arrival Time</h3>
+                    <p class="text-xl font-medium">8:00 PM</p>
+                    <p class="text-xs font-sans text-darkbrown/70 mt-1">Evening Celebration</p>
+                </div>
+
+                <div class="bg-softbeige/40 p-8 rounded-xl border border-champagne/30 shadow-sm">
+                    <svg class="w-8 h-8 text-rosegold mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <h3 class="text-xs font-sans tracking-[0.3em] uppercase text-rosegold mb-2">Venue</h3>
+                    <p class="text-xl font-medium">Tokyo Hall</p>
+                    <a href="https://maps.app.goo.gl/js32HkwPGe1FBVAP8" target="_blank" class="inline-block mt-4 text-xs font-sans tracking-widest uppercase bg-champagne text-white px-6 py-2.5 rounded-full hover:bg-opacity-95 transition-colors shadow">
+                        View Location
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Final Outro & WhatsApp Share -->
+        <section class="py-24 px-4 text-center bg-softbeige/20">
+            <div class="max-w-xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-light mb-2">Your Presence Will Make Our Day Complete</h2>
+                <p class="text-xs md:text-sm font-sans tracking-widest text-darkbrown/70 uppercase mb-8">We Can't Wait To Celebrate With You!</p>
+                
+                <h3 class="text-2xl md:text-3xl font-serif text-champagne mb-2">ABDELRAHMAN & ALIAA</h3>
+                <p class="text-xs font-sans text-rosegold mb-8">With Love ❤️</p>
+
+                <button onclick="shareWhatsApp()" class="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-3 rounded-full font-sans text-xs md:text-sm tracking-wider shadow-md hover:bg-[#20ba5a] transition-all">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.148-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    Share via WhatsApp
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function openInvitation() {
+            const envelope = document.getElementById('envelope-screen');
+            const mainContent = document.getElementById('main-content');
+
+            envelope.classList.add('opacity-0', 'scale-110', 'pointer-events-none');
+            setTimeout(() => {
+                envelope.style.display = 'none';
+                mainContent.classList.remove('opacity-0', 'pointer-events-none');
+            }, 600);
+        }
+
+        function shareWhatsApp() {
+            const url = window.encodeURIComponent(window.location.href);
+            const text = window.encodeURIComponent("You're invited to celebrate Abdelrahman & Aliaa's wedding! 💍✨");
+            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+        }
+    </script>
+</body>
 </html>
